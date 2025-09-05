@@ -467,6 +467,7 @@ export default [
         banner: "Fruits555000/PaintUtils.svg",
         creator: "Fruits555000",
         isGitHub: true,
+        documentation: "PaintUtils"
     },
     {
         name: "Resolution",
