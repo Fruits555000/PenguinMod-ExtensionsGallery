@@ -1,4 +1,4 @@
-// Paint Utils V1.0
+// Paint Utils V1.5
 
 (function(Scratch) {
   'use strict';
@@ -149,7 +149,10 @@
   }
 
     class Colour {
-        constructor(name, hex) {
+        constructor(name, hex, baseColour) {
+            if (baseColour && baseColour instanceof Colour) {
+                this.BaseColour = baseColour
+            }
             this.Name = name
             this.Colour = ColourType.fromHex(hex)
         }
@@ -179,26 +182,108 @@
 
     class ColourMixer {
         constructor() {
+
+            // Colours
+
             this.colours = new Map()
 
+            // Neutral Colours
+            this.colours.set("black", new Colour("black", "#000000"))
+            this.colours.set("white", new Colour("white", "#FFFFFF"))
+
+            // Hue Colours
+
             this.colours.set("red", new Colour("red", "#FE2712"))
+            this.colours.set("scarlet", new Colour("scarlet", "#FE3D0D"))
             this.colours.set("vermillion", new Colour("vermillion", "#FD5308"))
+            this.colours.set("persimmon", new Colour("persimmon", "#FC7605"))
             this.colours.set("orange", new Colour("orange", "#FB9902"))
+            this.colours.set("sun", new Colour("sun", "#FBAB02"))
             this.colours.set("amber", new Colour("amber", "#FABC02"))
+            this.colours.set("gold", new Colour("gold", "#FCDD1B"))
             this.colours.set("yellow", new Colour("yellow", "#FEFE33"))
+            this.colours.set("lemon", new Colour("lemon", "#E7F42F"))
             this.colours.set("chartreuse", new Colour("chartreuse", "#D0EA2B"))
+            this.colours.set("lime", new Colour("lime", "#9BCD2F"))
             this.colours.set("green", new Colour("green", "#66B032"))
+            this.colours.set("viridian", new Colour("viridian", "#34A180"))
             this.colours.set("teal", new Colour("teal", "#0392CE"))
+            this.colours.set("cerulean", new Colour("cerulean", "#036DE6"))
             this.colours.set("blue", new Colour("blue", "#0247FE"))
+            this.colours.set("indigo", new Colour("indigo", "#2024D1"))
             this.colours.set("violet", new Colour("violet", "#3D01A4"))
+            this.colours.set("amethyst", new Colour("amethyst", "#6201AA"))
             this.colours.set("purple", new Colour("purple", "#8601AF"))
+            this.colours.set("aubergine", new Colour("aubergine", "#970D7D"))
             this.colours.set("magenta", new Colour("magenta", "#A7194B"))
+            this.colours.set("crimson", new Colour("crimson", "#D3202F"))
+
+            
+            // Shade Colours
+
+            this.colours.set("maroon", new Colour("maroon", "#7F1309", this.colours.get("red")))
+            this.colours.set("carnelian", new Colour("carnelian", "#7F1E07", this.colours.get("scarlet")))
+            this.colours.set("chestnut", new Colour("chestnut", "#7E2904", this.colours.get("vermillion")))
+            this.colours.set("umber", new Colour("umber", "#7E2904", this.colours.get("persimmon")))
+            this.colours.set("brown", new Colour("brown", "#7D4C01", this.colours.get("orange")))
+            this.colours.set("sepia", new Colour("sepia", "#7D5501", this.colours.get("sun")))
+            this.colours.set("mud", new Colour("mud", "#7D5E01", this.colours.get("amber"))),
+            this.colours.set("mustard", new Colour("mustard", "#7E6E0E", this.colours.get("gold")))
+            this.colours.set("curry", new Colour("curry", "#7F7F1A", this.colours.get("yellow")))
+            this.colours.set("olive", new Colour("olive", "#737A18", this.colours.get("lemon")))
+            this.colours.set("moss", new Colour("moss", "#687516", this.colours.get("chartreuse")))
+            this.colours.set("fern", new Colour("fern", "#4D6618", this.colours.get("lime")))
+            this.colours.set("forest", new Colour("forest", "#335819", this.colours.get("green")))
+            this.colours.set("spirulina", new Colour("spirulina", "#1A5040"), this.colours.get("viridian"))
+            this.colours.set("lagoon", new Colour("lagoon", "#014967", this.colours.get("teal")))
+            this.colours.set("ocean", new Colour("ocean", "#013673", this.colours.get("cerulean")))
+            this.colours.set("navy", new Colour("navy", "#01237F", this.colours.get("blue")))
+            this.colours.set("midnight", new Colour("midnight", "#101269", this.colours.get("indigo")))
+            this.colours.set("nightshade", new Colour("nightshade", "#1E0052", this.colours.get("violet")))
+            this.colours.set("plum", new Colour("plum", "#310055"), this.colours.get("amethyst"))
+            this.colours.set("petunia", new Colour("petunia", "#430058"), this.colours.get("purple"))
+            this.colours.set("velvet", new Colour("velvet", "#4B063F", this.colours.get("aubergine")))
+            this.colours.set("wine", new Colour("wine", "#530C26", this.colours.get("magenta")))
+            this.colours.set("burgundy", new Colour("burgundy", "#691018", this.colours.get("crimson")))
+
+            // Tint Colours
+            this.colours.set("pink", new Colour("pink", "#FE9389", this.colours.get("red")))
+            this.colours.set("salmon", new Colour("salmon", "#FE9E86", this.colours.get("scarlet")))
+            this.colours.set("melon", new Colour("melon", "#FEA984", this.colours.get("vermilion")))
+            this.colours.set("apricot", new Colour("apricot", "#FDBA82", this.colours.get("persimmon")))
+            this.colours.set("peach", new Colour("peach", "#FDCC81", this.colours.get("orange")))
+            this.colours.set("maize", new Colour("maize", "#FDD581", this.colours.get("sun")))
+            this.colours.set("dandelion", new Colour("dandelion", "#FCDD81", this.colours.get("amber")))
+            this.colours.set("sand", new Colour("sand", "#FDEE8D", this.colours.get("gold")))
+            this.colours.set("canary", new Colour("canary", "#FEFE99", this.colours.get("yellow")))
+            this.colours.set("lemongrass", new Colour("lemongrass", "#F3F997", this.colours.get("lemon")))
+            this.colours.set("honeydew", new Colour("honeydew", "#E7F495", this.colours.get("chartreuse")))
+            this.colours.set("spring", new Colour("spring", "#CDE697", this.colours.get("lime")))
+            this.colours.set("mint", new Colour("mint", "#B2D799", this.colours.get("green")))
+            this.colours.set("turquoise", new Colour("turquoise", "#99D0C0", this.colours.get("viridian")))
+            this.colours.set("sky", new Colour("sky", "#81C8E7", this.colours.get("teal")))
+            this.colours.set("lake", new Colour("lake", "#81B6F3", this.colours.get("cerulean")))
+            this.colours.set("cornflower", new Colour("cornflower", "#80A3FF", this.colours.get("blue")))
+            this.colours.set("periwinkle", new Colour("periwinkle", "#8F91E8", this.colours.get("indigo")))
+            this.colours.set("lavender", new Colour("lavender", "#9E80D2", this.colours.get("violet")))
+            this.colours.set("jacaranda", new Colour("jacaranda", "#B080D5", this.colours.get("amethyst")))
+            this.colours.set("lilac", new Colour("lilac", "#C280D7", this.colours.get("purple")))
+            this.colours.set("fuchsia", new Colour("fuchsia", "#CB86BE", this.colours.get("aubergine")))
+            this.colours.set("sunset", new Colour("sunset", "#D38CA5", this.colours.get("magenta")))
+            this.colours.set("blush", new Colour("blush", "#E98F97", this.colours.get("crimson")))
+
+
+            // Colour Recipes
 
             this.colourRecipes = new Map()
+
+            // Secondary Hue Recipes
 
             this.colourRecipes.set("orangeRecipe", new ColourRecipe(this.colours.get("red"), this.colours.get("yellow"), this.colours.get("orange")))
             this.colourRecipes.set("greenRecipe", new ColourRecipe(this.colours.get("yellow"), this.colours.get("blue"), this.colours.get("green")))
             this.colourRecipes.set("purpleRecipe", new ColourRecipe(this.colours.get("blue"), this.colours.get("red"), this.colours.get("purple")))
+
+            // Tertiary Hue Recipes
 
             this.colourRecipes.set("vermillionRecipe", new ColourRecipe(this.colours.get("red"), this.colours.get("orange"), this.colours.get("vermillion")))
             this.colourRecipes.set("amberRecipe", new ColourRecipe(this.colours.get("orange"), this.colours.get("yellow"), this.colours.get("amber")))
@@ -206,6 +291,171 @@
             this.colourRecipes.set("tealRecipe", new ColourRecipe(this.colours.get("green"), this.colours.get("blue"), this.colours.get("teal")))
             this.colourRecipes.set("violetRecipe", new ColourRecipe(this.colours.get("blue"), this.colours.get("purple"), this.colours.get("violet")))
             this.colourRecipes.set("magentaRecipe", new ColourRecipe(this.colours.get("purple"), this.colours.get("red"), this.colours.get("magenta")))
+
+            // Quaternary Hue Recipes
+
+            this.colourRecipes.set("scarletRecipe", new ColourRecipe(this.colours.get("red"), this.colours.get("vermillion"), this.colours.get("scarlet")))
+            this.colourRecipes.set("persimmonRecipe", new ColourRecipe(this.colours.get("vermillion"), this.colours.get("orange"), this.colours.get("persimmon")))
+            this.colourRecipes.set("sunRecipe", new ColourRecipe(this.colours.get("orange"), this.colours.get("amber"), this.colours.get("sun")))
+            this.colourRecipes.set("goldRecipe", new ColourRecipe(this.colours.get("amber"), this.colours.get("yellow"), this.colours.get("gold")))
+            this.colourRecipes.set("lemonRecipe", new ColourRecipe(this.colours.get("yellow"), this.colours.get("chartreuse"), this.colours.get("lemon")))
+            this.colourRecipes.set("limeRecipe", new ColourRecipe(this.colours.get("chartreuse"), this.colours.get("green"), this.colours.get("lime")))
+            this.colourRecipes.set("viridianRecipe", new ColourRecipe(this.colours.get("green"), this.colours.get("teal"), this.colours.get("viridian")))
+            this.colourRecipes.set("ceruleanRecipe", new ColourRecipe(this.colours.get("teal"), this.colours.get("blue"), this.colours.get("cerulean")))
+            this.colourRecipes.set("indigoRecipe", new ColourRecipe(this.colours.get("blue"), this.colours.get("violet"), this.colours.get("indigo")))
+            this.colourRecipes.set("amethystRecipe", new ColourRecipe(this.colours.get("violet"), this.colours.get("purple"), this.colours.get("amethyst")))
+            this.colourRecipes.set("aubergineRecipe", new ColourRecipe(this.colours.get("purple"), this.colours.get("magenta"), this.colours.get("aubergine")))
+            this.colourRecipes.set("crimsonRecipe", new ColourRecipe(this.colours.get("magenta"), this.colours.get("red"), this.colours.get("crimson")))
+
+            // Primary Shade Recipes
+
+            this.colourRecipes.set("maroonRecipe", new ColourRecipe(this.colours.get("red"), this.colours.get("black"), this.colours.get("maroon")))
+            this.colourRecipes.set("curryRecipe", new ColourRecipe(this.colours.get("yellow"), this.colours.get("black"), this.colours.get("curry")))
+            this.colourRecipes.set("navyRecipe", new ColourRecipe(this.colours.get("blue"), this.colours.get("black"), this.colours.get("navy")))
+
+            // Secondary Shade Recipes
+
+            this.colourRecipes.set("brownRecipe1", new ColourRecipe(this.colours.get("maroon"), this.colours.get("curry"), this.colours.get("brown")))
+            this.colourRecipes.set("brownRecipe2", new ColourRecipe(this.colours.get("orange"), this.colours.get("black"), this.colours.get("brown")))
+
+            this.colourRecipes.set("forestRecipe1", new ColourRecipe(this.colours.get("curry"), this.colours.get("navy"), this.colours.get("forest")))
+            this.colourRecipes.set("forestRecipe2", new ColourRecipe(this.colours.get("green"), this.colours.get("black"), this.colours.get("forest")))
+
+            this.colourRecipes.set("petuniaRecipe1", new ColourRecipe(this.colours.get("navy"), this.colours.get("maroon"), this.colours.get("petunia")))
+            this.colourRecipes.set("petuniaRecipe2", new ColourRecipe(this.colours.get("purple"), this.colours.get("black"), this.colours.get("petunia")))
+
+            // Tertiary Shade Recipes
+
+            this.colourRecipes.set("chestnutRecipe1", new ColourRecipe(this.colours.get("maroon"), this.colours.get("brown"), this.colours.get("chestnut")))
+            this.colourRecipes.set("chestnutRecipe2", new ColourRecipe(this.colours.get("vermillion"), this.colours.get("black"), this.colours.get("chestnut")))
+
+            this.colourRecipes.set("mudRecipe1", new ColourRecipe(this.colours.get("brown"), this.colours.get("curry"), this.colours.get("mud")))
+            this.colourRecipes.set("mudRecipe2", new ColourRecipe(this.colours.get("amber"), this.colours.get("black"), this.colours.get("mud")))
+            
+            this.colourRecipes.set("mossRecipe1", new ColourRecipe(this.colours.get("curry"), this.colours.get("forest"), this.colours.get("moss")))
+            this.colourRecipes.set("mossRecipe2", new ColourRecipe(this.colours.get("chartreuse"), this.colours.get("black"), this.colours.get("moss")))
+            
+            this.colourRecipes.set("lagoonRecipe1", new ColourRecipe(this.colours.get("forest"), this.colours.get("navy"), this.colours.get("lagoon")))
+            this.colourRecipes.set("lagoonRecipe2", new ColourRecipe(this.colours.get("teal"), this.colours.get("black"), this.colours.get("lagoon"))) 
+
+            this.colourRecipes.set("nightshadeRecipe1", new ColourRecipe(this.colours.get("navy"), this.colours.get("petunia"), this.colours.get("nightshade")))
+            this.colourRecipes.set("nightshadeRecipe2", new ColourRecipe(this.colours.get("violet"), this.colours.get("black"), this.colours.get("nightshade")))
+            
+            this.colourRecipes.set("wineRecipe1", new ColourRecipe(this.colours.get("petunia"), this.colours.get("maroon"), this.colours.get("wine")))
+            this.colourRecipes.set("wineRecipe2", new ColourRecipe(this.colours.get("magenta"), this.colours.get("black"), this.colours.get("wine"))) 
+
+            // Quaternary Shade Recipes
+
+            this.colourRecipes.set("carnelianRecipe1", new ColourRecipe(this.colours.get("maroon"), this.colours.get("chestnut"), this.colours.get("carnelian")))
+            this.colourRecipes.set("carnelianRecipe2", new ColourRecipe(this.colours.get("scarlet"), this.colours.get("black"), this.colours.get("carnelian")))
+
+            this.colourRecipes.set("umberRecipe1", new ColourRecipe(this.colours.get("chestnut"), this.colours.get("brown"), this.colours.get("umber")))
+            this.colourRecipes.set("umberRecipe2", new ColourRecipe(this.colours.get("persimmon"), this.colours.get("black"), this.colours.get("umber")))
+
+            this.colourRecipes.set("sepiaRecipe1", new ColourRecipe(this.colours.get("brown"), this.colours.get("mud"), this.colours.get("sepia")))
+            this.colourRecipes.set("sepiaRecipe2", new ColourRecipe(this.colours.get("sun"), this.colours.get("black"), this.colours.get("sepia")))
+
+            this.colourRecipes.set("mustardRecipe1", new ColourRecipe(this.colours.get("mud"), this.colours.get("curry"), this.colours.get("mustard")))
+            this.colourRecipes.set("mustardRecipe2", new ColourRecipe(this.colours.get("gold"), this.colours.get("black"), this.colours.get("mustard")))
+
+            this.colourRecipes.set("oliveRecipe1", new ColourRecipe(this.colours.get("curry"), this.colours.get("moss"), this.colours.get("olive")))
+            this.colourRecipes.set("oliveRecipe2", new ColourRecipe(this.colours.get("lemon"), this.colours.get("black"), this.colours.get("olive")))
+            
+            this.colourRecipes.set("fernRecipe1", new ColourRecipe(this.colours.get("moss"), this.colours.get("forest"), this.colours.get("fern")))
+            this.colourRecipes.set("fernRecipe2", new ColourRecipe(this.colours.get("lime"), this.colours.get("black"), this.colours.get("fern")))
+
+            this.colourRecipes.set("spirulinaRecipe1", new ColourRecipe(this.colours.get("forest"), this.colours.get("lagoon"), this.colours.get("spirulina")))
+            this.colourRecipes.set("spirulinaRecipe2", new ColourRecipe(this.colours.get("viridian"), this.colours.get("black"), this.colours.get("spirulina")))
+
+            this.colourRecipes.set("oceanRecipe1", new ColourRecipe(this.colours.get("lagoon"), this.colours.get("navy"), this.colours.get("ocean")))
+            this.colourRecipes.set("oceanRecipe2", new ColourRecipe(this.colours.get("cerulean"), this.colours.get("black"), this.colours.get("ocean")))
+
+            this.colourRecipes.set("midnightRecipe1", new ColourRecipe(this.colours.get("navy"), this.colours.get("nightshade"), this.colours.get("midnight")))
+            this.colourRecipes.set("midnightRecipe2", new ColourRecipe(this.colours.get("indigo"), this.colours.get("black"), this.colours.get("midnight")))
+
+            this.colourRecipes.set("plumRecipe1", new ColourRecipe(this.colours.get("nightshade"), this.colours.get("petunia"), this.colours.get("plum")))
+            this.colourRecipes.set("plumRecipe2", new ColourRecipe(this.colours.get("amethyst"), this.colours.get("black"), this.colours.get("plum")))
+
+            this.colourRecipes.set("velvetRecipe1", new ColourRecipe(this.colours.get("petunia"), this.colours.get("wine"), this.colours.get("velvet")))
+            this.colourRecipes.set("velvetRecipe2", new ColourRecipe(this.colours.get("aubergine"), this.colours.get("black"), this.colours.get("velvet")))
+
+            this.colourRecipes.set("burgundyRecipe1", new ColourRecipe(this.colours.get("wine"), this.colours.get("maroon"), this.colours.get("burgundy")))
+            this.colourRecipes.set("burgundyRecipe2", new ColourRecipe(this.colours.get("crimson"), this.colours.get("black"), this.colours.get("burgundy")))
+
+            // Primary Tint Recipes
+
+            this.colourRecipes.set("pinkRecipe", new ColourRecipe(this.colours.get("red"), this.colours.get("white"), this.colours.get("pink")))
+            this.colourRecipes.set("canaryRecipe", new ColourRecipe(this.colours.get("yellow"), this.colours.get("white"), this.colours.get("canary")))
+            this.colourRecipes.set("cornflowerRecipe", new ColourRecipe(this.colours.get("blue"), this.colours.get("white"), this.colours.get("cornflower")))
+
+            // Secondary Tint Recipes
+
+            this.colourRecipes.set("peachRecipe1", new ColourRecipe(this.colours.get("pink"), this.colours.get("canary"), this.colours.get("peach")))
+            this.colourRecipes.set("peachRecipe2", new ColourRecipe(this.colours.get("orange"), this.colours.get("white"), this.colours.get("peach")))
+
+            this.colourRecipes.set("mintRecipe1", new ColourRecipe(this.colours.get("canary"), this.colours.get("cornflower"), this.colours.get("mint")))
+            this.colourRecipes.set("mintRecipe2", new ColourRecipe(this.colours.get("green"), this.colours.get("white"), this.colours.get("mint")))
+
+            this.colourRecipes.set("lilacRecipe1", new ColourRecipe(this.colours.get("cornflower"), this.colours.get("pink"), this.colours.get("lilac")))
+            this.colourRecipes.set("lilacRecipe2", new ColourRecipe(this.colours.get("purple"), this.colours.get("white"), this.colours.get("lilac")))
+
+            // Tertiary Tint Recipes
+
+            this.colourRecipes.set("melonRecipe1", new ColourRecipe(this.colours.get("pink"), this.colours.get("peach"), this.colours.get("melon")))
+            this.colourRecipes.set("melonRecipe2", new ColourRecipe(this.colours.get("vermillion"), this.colours.get("white"), this.colours.get("melon")))
+
+            this.colourRecipes.set("dandelionRecipe1", new ColourRecipe(this.colours.get("peach"), this.colours.get("canary"), this.colours.get("dandelion")))
+            this.colourRecipes.set("dandelionRecipe2", new ColourRecipe(this.colours.get("amber"), this.colours.get("white"), this.colours.get("dandelion")))
+            
+            this.colourRecipes.set("honeydewRecipe1", new ColourRecipe(this.colours.get("canary"), this.colours.get("mint"), this.colours.get("honeydew")))
+            this.colourRecipes.set("honeydewRecipe2", new ColourRecipe(this.colours.get("chartreuse"), this.colours.get("white"), this.colours.get("honeydew")))
+            
+            this.colourRecipes.set("skyRecipe1", new ColourRecipe(this.colours.get("mint"), this.colours.get("cornflower"), this.colours.get("sky")))
+            this.colourRecipes.set("skyRecipe2", new ColourRecipe(this.colours.get("teal"), this.colours.get("white"), this.colours.get("sky"))) 
+
+            this.colourRecipes.set("lavenderRecipe1", new ColourRecipe(this.colours.get("cornflower"), this.colours.get("lilac"), this.colours.get("lavender")))
+            this.colourRecipes.set("lavenderRecipe2", new ColourRecipe(this.colours.get("violet"), this.colours.get("white"), this.colours.get("lavender")))
+            
+            this.colourRecipes.set("sunsetRecipe1", new ColourRecipe(this.colours.get("petunia"), this.colours.get("maroon"), this.colours.get("sunset")))
+            this.colourRecipes.set("sunsetRecipe2", new ColourRecipe(this.colours.get("magenta"), this.colours.get("white"), this.colours.get("sunset"))) 
+
+            // Quaternary Tint Recipes
+
+            this.colourRecipes.set("salmonRecipe1", new ColourRecipe(this.colours.get("pink"), this.colours.get("melon"), this.colours.get("salmon")))
+            this.colourRecipes.set("salmonRecipe2", new ColourRecipe(this.colours.get("scarlet"), this.colours.get("white"), this.colours.get("salmon")))
+
+            this.colourRecipes.set("apricotRecipe1", new ColourRecipe(this.colours.get("melon"), this.colours.get("peach"), this.colours.get("apricot")))
+            this.colourRecipes.set("apricotRecipe2", new ColourRecipe(this.colours.get("persimmon"), this.colours.get("white"), this.colours.get("apricot")))
+
+            this.colourRecipes.set("maizeRecipe1", new ColourRecipe(this.colours.get("peach"), this.colours.get("dandelion"), this.colours.get("maize")))
+            this.colourRecipes.set("maizeRecipe2", new ColourRecipe(this.colours.get("sun"), this.colours.get("white"), this.colours.get("maize")))
+
+            this.colourRecipes.set("sandRecipe1", new ColourRecipe(this.colours.get("dandelion"), this.colours.get("canary"), this.colours.get("sand")))
+            this.colourRecipes.set("sandRecipe2", new ColourRecipe(this.colours.get("gold"), this.colours.get("white"), this.colours.get("sand")))
+
+            this.colourRecipes.set("lemongrassRecipe1", new ColourRecipe(this.colours.get("canary"), this.colours.get("honeydew"), this.colours.get("lemongrass")))
+            this.colourRecipes.set("lemongrassRecipe2", new ColourRecipe(this.colours.get("lemon"), this.colours.get("white"), this.colours.get("lemongrass")))
+            
+            this.colourRecipes.set("springRecipe1", new ColourRecipe(this.colours.get("honeydew"), this.colours.get("mint"), this.colours.get("spring")))
+            this.colourRecipes.set("springRecipe2", new ColourRecipe(this.colours.get("lime"), this.colours.get("white"), this.colours.get("spring")))
+
+            this.colourRecipes.set("turquoiseRecipe1", new ColourRecipe(this.colours.get("mint"), this.colours.get("sky"), this.colours.get("turquoise")))
+            this.colourRecipes.set("turquoiseRecipe2", new ColourRecipe(this.colours.get("viridian"), this.colours.get("white"), this.colours.get("turquoise")))
+
+            this.colourRecipes.set("lakeRecipe1", new ColourRecipe(this.colours.get("sky"), this.colours.get("cornflower"), this.colours.get("lake")))
+            this.colourRecipes.set("lakeRecipe2", new ColourRecipe(this.colours.get("cerulean"), this.colours.get("white"), this.colours.get("lake")))
+
+            this.colourRecipes.set("periwinkleRecipe1", new ColourRecipe(this.colours.get("cornflower"), this.colours.get("lavender"), this.colours.get("periwinkle")))
+            this.colourRecipes.set("periwinkleRecipe2", new ColourRecipe(this.colours.get("indigo"), this.colours.get("white"), this.colours.get("periwinkle")))
+
+            this.colourRecipes.set("jacarandaRecipe1", new ColourRecipe(this.colours.get("lavender"), this.colours.get("lilac"), this.colours.get("jacaranda")))
+            this.colourRecipes.set("jacarandaRecipe2", new ColourRecipe(this.colours.get("amethyst"), this.colours.get("white"), this.colours.get("jacaranda")))
+
+            this.colourRecipes.set("fuchsiaRecipe1", new ColourRecipe(this.colours.get("lilac"), this.colours.get("sunset"), this.colours.get("fuchsia")))
+            this.colourRecipes.set("fuchsiaRecipe2", new ColourRecipe(this.colours.get("aubergine"), this.colours.get("white"), this.colours.get("fuchsia")))
+
+            this.colourRecipes.set("blushRecipe1", new ColourRecipe(this.colours.get("sunset"), this.colours.get("pink"), this.colours.get("blush")))
+            this.colourRecipes.set("blushRecipe2", new ColourRecipe(this.colours.get("crimson"), this.colours.get("white"), this.colours.get("blush")))
         }
 
         mix(colour1, colour2) {
@@ -251,7 +501,6 @@
                 name: "Paint Utils",
                 menuIconURI: paintUtilsIcon,
                 blockIconURI: paintUtilsIcon,
-                docsURI: "https://extensions.penguinmod.com/docs/PaintUtils",
                 color1: "#d1d1d1",
                 color2: "#999999",
                 color3: "#999999",
@@ -279,6 +528,29 @@
                     }
                 },
                 {
+                    opcode: "colourTypes",
+                    text: "[COLOUR_TYPE_OPTIONS] [COLOUR_NAME] and return the [MIX_OPTIONS]",
+                    blockType: Scratch.BlockType.REPORTER,
+                    disableMonitor: true,
+                    arguments: {
+                        COLOUR_TYPE_OPTIONS: {
+                            type: Scratch.ArgumentType.STRING,
+                            menu: "COLOUR_TYPE_OPTIONS"
+                        },
+
+                        COLOUR_NAME: {
+                            type: Scratch.ArgumentType.STRING,
+                            defaultValue: "green"
+                        },
+
+                        MIX_OPTIONS: {
+                            type: Scratch.ArgumentType.STRING,
+                            menu: "MIX_OPTIONS"
+                        }
+                    }
+                },
+
+                {
                     opcode: "getColour",
                     text: "get colour from colour name [COLOUR_NAME]",
                     blockType: Scratch.BlockType.REPORTER,
@@ -287,7 +559,7 @@
                         COLOUR_NAME: {
                             type: Scratch.ArgumentType.STRING,
                             defaultValue: "green"
-                        },
+                        }
                     }
                 }
             ],
@@ -298,6 +570,14 @@
                     items: [
                         {text: "colour name", value: "colourName"},
                         {text: "colour", value: "colour"}
+                    ]
+                },
+
+                COLOUR_TYPE_OPTIONS: {
+                    acceptReporters: false,
+                    items: [
+                        {text: "darken", value: "black"},
+                        {text: "lighten", value: "white"}
                     ]
                 }
             }
@@ -315,6 +595,30 @@
 
         if ((!colour1 || !colour2) || (!colour1 && !colour2)) {
             throw new Error("Invalid colours found in block.")
+        }
+
+        switch (mix_options) {
+            case "colourName":
+                const colourName = colourMixer.mix(colour1, colour2).Name
+                return colourName
+            case "colour":
+                const colour = colourMixer.mix(colour1, colour2).Colour
+                return colour
+            default:
+                return null
+        }
+    }
+
+    colourTypes(args) {
+        const colourName = Scratch.Cast.toString(args.COLOUR_NAME).toLowerCase()
+        const mix_options = args.MIX_OPTIONS
+        const colour_type_options = args.COLOUR_TYPE_OPTIONS
+        
+        const colour1 = colourMixer.colours.get(colourName)
+        const colour2 = colourMixer.colours.get(colour_type_options)
+
+        if ((!colour1 || !colour2) || (!colour1 && !colour2)) {
+            throw new Error("Invalid colour and/or colour type option found in block.")
         }
 
         switch (mix_options) {
