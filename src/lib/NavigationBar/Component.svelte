@@ -30,6 +30,9 @@
             .trim().toLowerCase();
 
         if (props.onsearch) props.onsearch(searchTerm);
+
+        const event = new CustomEvent("penguinmod-search-bar-input", { detail: searchTerm });
+        document.dispatchEvent(event);
     };
     const recommendationClicked = (extension) => {
         const event = new CustomEvent("penguinmod-recommendation-clicked", { detail: extension.code });
@@ -54,7 +57,7 @@
     <BarPage style="padding:0.5rem" onclick={toggleTheme}>
         <img src="/icons/moon.svg" alt="Theme" />
     </BarPage>
-    <BarPage link={"/docs.html"}>Documentation</BarPage>
+    <BarPage link={"/docs"}>Documentation</BarPage>
 
     {#if displaySearchBar}
         <div class="search">
