@@ -228,8 +228,8 @@
             this.colours.set("brown", new Colour("brown", "#7D4C01", this.colours.get("orange")))
             this.colours.set("sepia", new Colour("sepia", "#7D5501", this.colours.get("sun")))
             this.colours.set("mud", new Colour("mud", "#7D5E01", this.colours.get("amber"))),
-            this.colours.set("mustard", new Colour("mustard", "#7E6E0E", this.colours.get("gold")))
-            this.colours.set("curry", new Colour("curry", "#7F7F1A", this.colours.get("yellow")))
+            this.colours.set("curry", new Colour("curry", "#7E6E0E", this.colours.get("gold")))
+            this.colours.set("mustard", new Colour("mustard", "#7F7F1A", this.colours.get("yellow")))
             this.colours.set("olive", new Colour("olive", "#737A18", this.colours.get("lemon")))
             this.colours.set("moss", new Colour("moss", "#687516", this.colours.get("chartreuse")))
             this.colours.set("fern", new Colour("fern", "#4D6618", this.colours.get("lime")))
