@@ -12,18 +12,18 @@ Here are the colours in question with their position in the colour hierarchy in 
 | Shades                                                                      | Hues                                                                              | Tints |
 |-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------|-------|
 |![#7F1309](https://placehold.co/15x15/7F1309/7F1309.png) **Maroon (Primary)**|![#FE2712](https://placehold.co/15x15/FE2712/FE2712.png) **Red (Primary)**         |
-|        |![#FE3D0D](https://placehold.co/15x15/FE3D0D/FE3D0D.png) **Scarlet (Quaternary)**  |
-|        |![#FD5308](https://placehold.co/15x15/FD5308/FD5308.png) **Vermillion (Tertiary)** |
-|        |![#FC7605](https://placehold.co/15x15/FC7605/FC7605.png) **Persimmon (Quaternary)**|
-|        |![#FB9902](https://placehold.co/15x15/FB9902/FB9902.png) **Orange (Secondary)**    |
-|        |![#FBAB02](https://placehold.co/15x15/FBAB02/FBAB02.png) **Sun (Quaternary)**
-|        |![#FABC02](https://placehold.co/15x15/FABC02/FABC02.png) **Amber (Tertiary)**      |
-|        |![#FCDD1B](https://placehold.co/15x15/FCDD1B/FCDD1B.png) **Gold (Quaternary)**
-|        |![#FEFE33](https://placehold.co/15x15/FEFE33/FEFE33.png) **Yellow (Primary)**      |
-|        |![#E7F42F](https://placehold.co/15x15/E7F42F/E7F42F.png) **Lemon (Quaternary)**
-|        |![#D0EA2B](https://placehold.co/15x15/D0EA2B/D0EA2B.png) **Chartreuse (Tertiary)** |
-|        |![#9BCD2F](https://placehold.co/15x15/9BCD2F/9BCD2F.png) **Lime (Quaternary)**
-|        |![#66B032](https://placehold.co/15x15/66B032/66B032.png) **Green (Secondary)**     |
+|![#7F1E07](https://placehold.co/15x15/7F1E07/7F1E07.png) **Carnelian (Quaternary)**|![#FE3D0D](https://placehold.co/15x15/FE3D0D/FE3D0D.png) **Scarlet (Quaternary)**  |
+|![#7E2904](https://placehold.co/15x15/7E2904/7E2904.png) **Chestnut (Tertiary)**|![#FD5308](https://placehold.co/15x15/FD5308/FD5308.png) **Vermillion (Tertiary)** |
+|![#7E3B03](https://placehold.co/15x15/7E3B03/7E3B03.png) **Umber (Quaternary)**|![#FC7605](https://placehold.co/15x15/FC7605/FC7605.png) **Persimmon (Quaternary)**|
+|![#7D4C01](https://placehold.co/15x15/7D4C01/7D4C01.png) **Brown (Secondary)**|![#FB9902](https://placehold.co/15x15/FB9902/FB9902.png) **Orange (Secondary)**    |
+|![#7D5501](https://placehold.co/15x15/7D5501/7D5501.png) **Sepia (Quaternary)**|![#FBAB02](https://placehold.co/15x15/FBAB02/FBAB02.png) **Sun (Quaternary)**
+|![#7D5E01](https://placehold.co/15x15/7D5E01/7D5E01.png) **Mud (Tertiary)**|![#FABC02](https://placehold.co/15x15/FABC02/FABC02.png) **Amber (Tertiary)**      |
+|![#7E6E0E](https://placehold.co/15x15/7E6E0E/7E6E0E.png) **Curry (Quaternary)**|![#FCDD1B](https://placehold.co/15x15/FCDD1B/FCDD1B.png) **Gold (Quaternary)**
+|![#7F7F1A](https://placehold.co/15x15/7F7F1A/7F7F1A.png) **Mustard (Primary)**|![#FEFE33](https://placehold.co/15x15/FEFE33/FEFE33.png) **Yellow (Primary)**      |
+|![#737A18](https://placehold.co/15x15/737A18/737A18.png) **Olive (Quaternary)**|![#E7F42F](https://placehold.co/15x15/E7F42F/E7F42F.png) **Lemon (Quaternary)**
+|![#687516](https://placehold.co/15x15/687516/687516.png) **Moss (Tertiary)**|![#D0EA2B](https://placehold.co/15x15/D0EA2B/D0EA2B.png) **Chartreuse (Tertiary)** |
+|![#4D6618](https://placehold.co/15x15/4D6618/4D6618.png) **Fern (Quaternary)**|![#9BCD2F](https://placehold.co/15x15/9BCD2F/9BCD2F.png) **Lime (Quaternary)**
+|![#335819](https://placehold.co/15x15/335819/335819.png) **Forest (Primary)**|![#66B032](https://placehold.co/15x15/66B032/66B032.png) **Green (Secondary)**     |
 |        |![#34A180](https://placehold.co/15x15/34A180/34A180.png) **Viridian (Quaternary)**
 |        |![#0392CE](https://placehold.co/15x15/0392CE/0392CE.png) **Teal (Tertiary)**       |
 |        |![#036DE6](https://placehold.co/15x15/036DE6/036DE6.png) **Cerulean (Quaternary)**
